@@ -1,0 +1,30 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# Add Employee
+GET     /showAddEmployeeForm        controllers.DashboardController.showAddEmployeeForm
+
+POST    /processAddEmployeeForm     controllers.DashboardController.processAddEmployeeForm
+
+# Dashboard
+GET    /showDashboard               controllers.DashboardController.showDashboard
+
+POST   /searchDashboard             controllers.DashboardController.searchDashboard
+
+# Edit Employee
+GET     /showEditEmployeeForm/:id              controllers.DashboardController.showEditEmployeeForm(id:Int)
+
+POST    /processEditEmployeeForm            controllers.DashboardController.processEditEmployeeForm
+
+GET    /deleteEmployee/:id         controllers.DashboardController.deleteEmployee(id:Int)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+# For WebJars
+
+GET     /webjars/*file                    controllers.WebJarAssets.at(file)

@@ -1,0 +1,66 @@
+@import model.{Employee,Dashboard}
+@(dashboardSearchForm:Form[Dashboard],employeeList:List[Employee])(implicit message:Messages,flash:Flash)
+@implicitFC = @{ b3.horizontal.fieldConstructor("col-md-4", "col-md-8") }
+@main("Add Employee Page") {
+<div class="row" style="text-align:center;margin-top:50px;">
+    <div class="col-md-2"></div>
+    <div class="col-md-6">
+        @b3.form(action=routes.DashboardController.searchDashboard){
+        @b3.text(dashboardSearchForm("name"),'_label ->"Search Name")
+    </div>
+    <div class="col-md-2" style="padding-left:-20px">
+        <button type="submit" value="search" class="btn btn-primary">Search</button>
+        }
+    </div>
+</div>
+<div class="row" style="text-align:center;">
+    <div class="col-md-3"></div>
+<div class="col-md-6">
+    <div>
+        <p>
+        <p style="color:red">
+            @if(flash.get("success").isDefined){
+            @flash.get("success")}
+        </p>
+        </p>
+        @b3.form(action=routes.DashboardController.showDashboard){
+        <table class="table table-striped">
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Date Of Birth</td>
+                <td>Date Of Joining</td>
+                <td>Designation</td>
+                <td>Delete</td>
+            </tr>
+            @employeeList.map{employee =>
+            <tr>
+                <td>@employee.id</td>
+                <td><a href="@routes.DashboardController.showEditEmployeeForm(employee.id)">@employee.name</a></td>
+                <td>@employee.dateOfBirth</td>
+                <td>@employee.dateOfJoining</td>
+                <td>@employee.designation</td>
+                <td><a href="@routes.DashboardController.deleteEmployee(employee.id)">Delete</a></td>
+                }
+            </tr>
+        </table>
+    </div>
+    <div>
+        <p style="color:red">
+            @if(flash.get("error").isDefined){
+            @flash.get("error")}
+        </p>
+    </div>
+
+    }
+    }
+</div>
+</div>
+<div class="col-md-5"></div>
+
+    <div class="col-md-6">
+    @b3.form(action=routes.DashboardController.showAddEmployeeForm){
+    <button type="submit" value="add" class="btn btn-primary">Add Employee</button>
+    }
+    </div>
+

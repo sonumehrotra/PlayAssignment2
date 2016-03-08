@@ -1,0 +1,27 @@
+@import model.Employee
+@(employeeForm:Form[Employee])(implicit message:Messages,flash:Flash)
+@implicitFC = @{ b3.horizontal.fieldConstructor("col-md-4", "col-md-8") }
+@main("Add Employee Page") {
+<h2 style="text-align:center;">Add New Employee !!</h2>
+<div class="col-md-3"></div>
+<div class="row col-md-5" style="text-align:left;margin-top:20px;">
+
+        <table class="table table-striped" style="text-align:left;">
+        @b3.form(action=routes.DashboardController.processAddEmployeeForm){
+        <tr>@b3.text(employeeForm("id"),'_label -> "Id")</tr>
+        <tr>@b3.text(employeeForm("name"),'_label -> "Name")</tr>
+        <tr>@b3.text(employeeForm("dateOfBirth"),'_label -> "Date Of Birth")</tr>
+        <tr>@b3.text(employeeForm("dateOfJoining"),'_label -> "Date Of Joining")</tr>
+        <tr>@b3.text(employeeForm("designation"),'_label -> "Designation")</tr>
+        </table>
+        <div style="text-align:center">
+        <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </div>
+</div>
+
+
+
+}
+}
